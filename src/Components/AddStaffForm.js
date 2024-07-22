@@ -45,19 +45,19 @@ const AddStaffForm = ({ addStaff }) => {
     <Form onSubmit={handleAddStaff}>
       <Input
         type="text"
-        placeholder="Name"
+        placeholder="Hjr ko name hannus"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <Input
         type="text"
-        placeholder="Role"
+        placeholder="Hjr ko role k ho ?"
         value={role}
         onChange={(e) => setRole(e.target.value)}
       />
       <Input
         type="text"
-        placeholder="Avatar URL"
+        placeholder="Profile Path dinus"
         value={avatar}
         onChange={(e) => setAvatar(e.target.value)}
       />
