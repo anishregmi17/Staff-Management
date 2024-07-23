@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 
 const Form = styled.form`
   display: flex;
@@ -36,24 +36,37 @@ const Button = styled.button`
   }
 `;
 
-const AddStaffForm = () => {
+const EditStaffForm = () => {
+  const { id } = useParams();
+  const [staff, setStaff] = useState({});
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
   const [avatar, setAvatar] = useState("");
   const navigate = useNavigate();
 
-  const handleAddStaff = (e) => {
-    e.preventDefault();
-    if (name && role && avatar) {
-      const newStaff = { id: Date.now(), name, role, avatar };
-      const staff = JSON.parse(localStorage.getItem("staff")) || [];
-      localStorage.setItem("staff", JSON.stringify([...staff, newStaff]));
-      navigate("/");
+  useEffect(() => {
+    const allStaff = JSON.parse(localStorage.getItem("staff")) || [];
+    const staffMember = allStaff.find((s) => s.id === parseInt(id));
+    if (staffMember) {
+      setStaff(staffMember);
+      setName(staffMember.name);
+      setRole(staffMember.role);
+      setAvatar(staffMember.avatar);
     }
+  }, [id]);
+
+  const handleUpdateStaff = (e) => {
+    e.preventDefault();
+    const allStaff = JSON.parse(localStorage.getItem("staff")) || [];
+    const updatedStaff = allStaff.map((s) =>
+      s.id === parseInt(id) ? { ...s, name, role, avatar } : s
+    );
+    localStorage.setItem("staff", JSON.stringify(updatedStaff));
+    navigate("/");
   };
 
   return (
-    <Form onSubmit={handleAddStaff}>
+    <Form onSubmit={handleUpdateStaff}>
       <Input
         type="text"
         placeholder="Name"
@@ -72,9 +85,9 @@ const AddStaffForm = () => {
         value={avatar}
         onChange={(e) => setAvatar(e.target.value)}
       />
-      <Button type="submit">Add Staff</Button>
+      <Button type="submit">Update Staff</Button>
     </Form>
   );
 };
 
-export default AddStaffForm;
+export default EditStaffForm;

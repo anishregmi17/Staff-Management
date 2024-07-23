@@ -4,8 +4,17 @@ const GlobalStyles = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+  }
+  h1 {
+    font-size: 2.5rem;
+    color: #333;
+  }
+  p {
+    font-size: 1rem;
+    color: #666;
   }
 `;
 
