@@ -85,7 +85,7 @@ const EditStaffForm = () => {
         value={avatar}
         onChange={(e) => setAvatar(e.target.value)}
       />
-      <Button type="submit">Update Staff</Button>
+      <Button type="submit">Update Staff Details</Button>
     </Form>
   );
 };
